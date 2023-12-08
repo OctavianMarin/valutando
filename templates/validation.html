@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <form method="post" class="attributesContainer">
+            Check {{ email }} to get the code that you must insert in the form below.<br>
+            <input type="text" class="textInput" name="code" placeholder="code" required><br>
+            <input type="submit" class="button" name="validation_sub"><br>
+            If you don't see the code, check in the spam.<br>
+        </form>
+    </div>
+{% endblock %}

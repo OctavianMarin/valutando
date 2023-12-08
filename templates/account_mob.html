@@ -1,0 +1,51 @@
+{% extends 'base_mob.html' %}
+{% block title %} Account {% endblock %}
+{% block body %}
+    {% if logged %}
+        <div class="container">
+            <div class="attributesContainer" style="font-size:36px;">
+                {{ user['username'] }}<br>
+                {% if ownership %}
+                    Email: {{ user['email'] }}<br>
+                {% endif %}
+            </div>
+        </div>
+        <form method="get">
+            <button class="buttonMob" type="submit" name="extend_actions" value={{ not extend_actions }}> Azioni </button>
+        </form>
+        {% if ownership %}
+            {% if session['actions'] %}
+                <div class="writePopup" style="top:400px;width:70%;margin-left:-35%;font-size:36px;">
+                    <div class="attributesContainer">
+                        {% for action in session['actions'] %}
+                            {{ action }} => {{ session['actions'][action] }}<br>
+                        {% endfor %}
+                        <form method="post">
+                            <input type="password" name="password" class="textInputMob" style="width:90%;" placeholder="password">
+                            <input type="submit" class="buttonMob" value="Conferma" name="confirm">
+                            <input type="submit" class="buttonMob" value="Anulla" name="cancel"><br>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+            {% if extend_actions %}
+                <div class="container" style="font-size:36px;">
+                    <div class="attributesContainer">
+                        Sii cauto<br>
+                        <form method="post">
+                            <input type="email" class="textInputMob" style="width:50%;" name="email" required placeholder={{ user['email'] }}>
+                            <input type="submit" class="buttonMob" name="email_mod" value="Modifica Email">
+                        </form><br>
+                        <form method="post">
+                            <input type="password" class="textInputMob" style="width:50%;" name="password" placeholder="Nuova password">
+                            <input type="submit" class="buttonMob" name="password_mod" value="Modifica Password">
+                        </form><br>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        You must be logged in to view this content<br>
+        You can log in <a href="../../login/"> here </a><br>
+    {% endif %}
+{% endblock %}

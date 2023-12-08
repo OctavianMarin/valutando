@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Log In {% endblock %}
+{% block body %}
+    <div class="container">
+        <form method="post" class="attributesContainer">
+            <input type="text" class="textInput" name="username_email" placeholder="username/email" required value={{ username_email }}><br>
+            <input type="password" name="password" class="textInput" placeholder="password" required><br>
+            <input type="checkbox" name="remember"> remember (only if cookies are accepted) <br>
+            <input type="submit" name="login_sub" class="button"><br>
+        </form>
+    </div>
+    <form method="post">
+        <button class="button" name="register"> Register </button>
+    </form>
+    </body>
+    </html>
+{% endblock %}

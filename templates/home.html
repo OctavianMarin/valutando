@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="profContent">
+        {% for prof in profs %}
+            <a class="container" href={{ url_for('prof_reviews', username=prof['img_username']) }}>
+            <img src={{ url_for('prof_image', username=prof['img_username']) }} alt="Cannot load the image :(" style="width:200px;height:200px;">
+                <div class="attributesContainer">
+                    <strong style="font-size:20px;">{{ prof['username'] }}</strong><br>
+                    {{ prof['age'] }} anni<br>
+                    <div class="coloredCircle"
+                         style={{ prof['color'] }}
+                    >
+                        <div class="valuationCircle">
+                            {{ prof['valuation'] }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <form method="post">
+        <button class="button" name="add_prof"> Aggiungi un Nuovo Prof </button>
+    </form>
+{% endblock %}

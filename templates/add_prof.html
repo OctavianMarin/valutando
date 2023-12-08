@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Add Prof {% endblock %}
+{% block body %}
+    {% if prof_added %}
+        <div class="container">
+            <div class="attributesContainer">
+                Thank you for contributing to service. Your form about {{ prof_added }} is being checked soon by a moderator.<br>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container">
+        <form class="attributesContainer" method="post" enctype="multipart/form-data">
+            <input type="text" class="textInput" name="Cognome" required placeholder="surname"><br>
+            <input type="text" class="textInput" name="Nome" required placeholder="name"><br>
+            Data di nascita:<br>
+            <input type="date" class="textInput" name="birth" required placeholder="Data di Nascita"><br>
+            Immagine per profilo(opzionale):<br>
+            <input type="file" class="textInput" name="image" accept="image/jpeg"><br>
+            <input type="submit" class="button" name="add_prof"><br>
+        </form>
+    </div>
+{% endblock %}

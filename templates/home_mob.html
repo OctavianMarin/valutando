@@ -1,0 +1,22 @@
+{% extends 'base_mob.html' %}
+{% block body %}
+    <div class="profContent">
+        {% for prof in profs %}
+            <a class="container" href={{ url_for('prof_reviews', username=prof['img_username']) }}>
+                <img src={{ url_for('prof_image', username=prof['img_username']) }} alt="Cannot load the image :(" style="height:410px;width:50%;"><br>
+                <div class="attributesContainer" style="padding:50px;padding-left:70px;">
+                    <strong style="font-size:45px;">{{ prof['username'] }}</strong><br>
+                    <div style="font-size:32px;"> {{ prof['age'] }} anni </div>
+                    <div class="coloredCircleBig" style={{ prof['color'] }}>
+                        <div class="valuationCircleBig">
+                            {{ prof['valuation'] }}<br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    <form method="post">
+        <button class="buttonMob" name="add_prof"> Aggiungi un Nuovo Prof </button>
+    </form>
+{% endblock %}

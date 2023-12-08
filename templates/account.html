@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Account {% endblock %}
+{% block body %}
+    {% if logged %}
+        <div class="container">
+            <div class="attributesContainer">
+                {{ user['username'] }}<br>
+                {% if ownership %}
+                    Email: {{ user['email'] }}<br>
+                {% endif %}
+            </div>
+        </div>
+        <form method="get">
+            <button class="button" type="submit" name="extend_actions" value={{ not extend_actions }}> Azioni </button>
+        </form>
+        {% if ownership %}
+            {% if session['actions'] %}
+                <div class="writePopup" style="width:350px;margin-left:-175px;">
+                    <div class="attributesContainer">
+                        {% for action in session['actions'] %}
+                            {{ action }} => {{ session['actions'][action] }}<br>
+                        {% endfor %}
+                        <form method="post">
+                            <input type="password" name="password" class="textInput" style="width:60%;" placeholder="password">
+                            <input type="submit" class="button" value="Conferma" name="confirm">
+                            <input type="submit" class="button" value="Anulla" name="cancel"><br>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+            {% if extend_actions %}
+                <div class="container">
+                    <div class="attributesContainer">
+                        Sii cauto<br>
+                        <form method="post">
+                            <input type="email" class="textInput" style="width:50%;" name="email" required placeholder={{ user['email'] }}>
+                            <input type="submit" class="button" name="email_mod" value="Modifica Email">
+                        </form><br>
+                        <form method="post">
+                            <input type="password" class="textInput" style="width:50%;" name="password" placeholder="Nuova password">
+                            <input type="submit" class="button" name="password_mod" value="Modifica Password">
+                        </form><br>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        You must be logged in to view this content<br>
+        You can log in <a href="../../login/"> here </a><br>
+    {% endif %}
+{% endblock %}

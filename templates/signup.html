@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up {% endblock %}
+{% block body %}
+    <div class="container">
+        <form class="attributesContainer" method="post">
+            <input type="text" name="username" placeholder="username" required class="textInput" value={{ username }}><br>
+            <input type="email" name="email" placeholder="email" required class="textInput" value={{ email }}><br>
+            <input type="password" name="password" placeholder="password" class="textInput" required><br>
+            <input type="password" name="confirm_password" placeholder="confirm password" class="textInput" required><br>
+            <input type="checkbox" name="remember"> remember (only if cookies are accepted) <br>
+            <input type="submit" name="signup_sub" class="button"><br>
+        </form>
+    </div>
+    <form method="post">
+        <button name="login" class="button"> Log In </button>
+    </form>
+{% endblock %}

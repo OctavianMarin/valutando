@@ -1,0 +1,17 @@
+{% extends 'base_mob.html' %}
+{% block title %} Sign Up {% endblock %}
+{% block body %}
+    <div class="container" style="width:70%;font-size:20px;">
+        <form class="attributesContainer" method="post">
+            <input type="text" name="username" placeholder="username" required class="textInputMob" value={{ username }}><br>
+            <input type="email" name="email" placeholder="email" required class="textInputMob" value={{ email }}><br>
+            <input type="password" name="password" placeholder="password" class="textInputMob" required><br>
+            <input type="password" name="confirm_password" placeholder="confirm password" class="textInputMob" required><br>
+            <input type="checkbox" name="remember" class="checkMob"> remember (only if cookies are accepted) <br>
+            <input type="submit" name="signup_sub" class="buttonMob"><br>
+        </form>
+    </div>
+    <form method="post">
+        <button name="login" class="buttonMob"> Log In </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base_mob.html' %}
+{% block title %} Prof {% endblock %}
+{% block body %}
+    <div class="container">
+        <img src={{ url_for('prof_image', username=info['img_username']) }} alt="Cannot load the image :(" style="width:50%;height:450px;"><br>
+        <div class="attributesContainer" style="padding:50px;padding-left:70px;">
+            <strong style="font-size:48px;">{{ info['username'] }}</strong><br>
+            <div style="font-size:34px;"> {{ info['age'] }} anni </div>
+            <div style="color:#B2B2B2;font-size:22px;"> {{ info['birth'] }} </div>
+            <div class="coloredCircleBig" style={{ info['color'] }}>
+                <div class="valuationCircleBig">
+                    {{ info['valuation'] }}<br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post">
+        <button type="submit" name="add_review" class="buttonMob"> Scrivi una nuova recensione </button><br>
+    </form>
+    {% if review_popup %}
+        <form method="post" class="writePopup" style="top:400px;width:90%;">
+            <div style="font-size:35px;">
+                <input type="radio" name="value_nrev" class="checkMob" value=1 required> 1
+                <input type="radio" name="value_nrev" class="checkMob" value=2> 2
+                <input type="radio" name="value_nrev" class="checkMob" value=3> 3
+                <input type="radio" name="value_nrev" class="checkMob" value=4> 4
+                <input type="radio" name="value_nrev" class="checkMob" value=5> 5
+            </div><br>
+            <textarea
+                name="text_nrev"
+                class="textInputMob"
+                columns="5"
+                placeholder="Scrivi qualcosa di intelligente. Ti ricordiamo che non devi scrivere una sfuriata ma esprimere aspetti positivi e negativi nel modo più utile possibilie."
+                style="height:250px;width:90%;"
+            ></textarea>
+            <div>
+                <input type="submit" name="submit_nrev" class="buttonMob">
+                <input type="submit" value="Anulla" class="buttonMob">
+            </div>
+        </form>
+    {% endif %}
+    {% for review in reviews %}
+        <div class="container" style="width:95%;">
+            <div class="coloredCircle" style="background-color:#FED049;margin:25px;">
+                <div class="valuationCircle" style="padding-left:30px;padding-right:30px;">
+                    {{ review['value'] }}<br>
+                </div>
+            </div>
+            <div class="attributesContainer">
+                <strong style="font-size:48px;"> {{ review['committer'] }}</strong>
+                <div style="color:#B2B2B2;font-size:25px;"> {{ review['time'] }} </div>
+                <div class="messageArea" style="font-size:32px;">
+                    {% for message in review['text'] %}
+                        {{ message }}<br>
+                    {% endfor %}
+                </div>
+                <form method="post">
+                    {% if review['clicked'][0] %}
+                        <button type="submit" name="like" class="buttonMob" style="border:solid 5px #455E89;" value={{ loop.index }}>
+                            <img width="30px" src={{ url_for('element_image', element='like') }}>
+                            {{ review['likes'][0] }}
+                        </button>
+                    {% else %}
+                        <button type="submit" name="like" class="buttonMob" value={{ loop.index }}>
+                            <img width="30px" src={{ url_for('element_image', element='like') }}>
+                            {{ review['likes'][0] }}
+                        </button>
+                    {% endif %}
+                    {% if review['clicked'][1] %}
+                        <button type="submit" name="dislike" class="buttonMob" style="border:solid 5px #455E89;" value={{ loop.index }}>
+                            <img width="30px" src={{ url_for('element_image', element='dislike') }}>
+                            {{ review['likes'][1] }}
+                        </button>
+                    {% else %}
+                        <button type="submit" name="dislike" class="buttonMob" value={{ loop.index }}>
+                            <img width="30px" src={{ url_for('element_image', element='dislike') }}>
+                            {{ review['likes'][1] }}
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

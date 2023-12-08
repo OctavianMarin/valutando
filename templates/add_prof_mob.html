@@ -1,0 +1,22 @@
+{% extends 'base_mob.html' %}
+{% block title %} Add Prof {% endblock %}
+{% block body %}
+    {% if prof_added %}
+        <div class="container">
+            <div class="attributesContainer">
+                Grazie per il contributo! Il tuo form riguardo {{ prof_added }} sarà presto controllato da un moderatore.<br>
+            </div>
+        </div>
+    {% endif %}
+    <div class="container" style="width:82%;font-size:20px;">
+        <form class="attributesContainer" method="post" enctype="multipart/form-data">
+            <input type="text" class="textInputMob" name="surname" required placeholder="Cognome"><br>
+            <input type="text" class="textInputMob" name="name" required placeholder="Nome"><br>
+            Data di nascita:<br>
+            <input type="date" class="textInputMob" name="birth" required placeholder="Data di Nascita"><br>
+            Immagine per profilo(opzionale):<br>
+            <input type="file" class="textInputMob" name="image" accept="image/jpeg"><br>
+            <input type="submit" class="buttonMob" name="add_prof"><br>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href={{ url_for('styler') }}>
+        <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
+        <title> Valutando - {{ title }} </title>
+    </head>
+    <body>
+        <header class="titleBar">
+            <a href={{ url_for('home') }}>
+                <img src={{ url_for('element_image', element='home') }} class="homeIcon">
+            </a>
+            <div class="titleText"> {{ title }} </div>
+            <form method="post" class="utilsZone">
+                <button name="info" class="infoButton">
+                    <img src={{ url_for('element_image', element='info') }}>
+                </button>
+                {% if logged %}
+                    <button type="submit" name="account" class="buttonAccount"> {{ session['username'] }} </button>
+                {% else %}
+                    <button type="submit" name="login" class="buttonAccount"> Log In </button>
+                {% endif %}
+            </form>
+        </header>
+        {% if 'accept_cookie' not in session %}
+            <div class="cookies">
+                Per evitarti di accedere ogni volta che visiti questo sito è necessario settare qualche cookie locale.<br>
+                Puoi accettarlo o decidere di accedere manualmente ogni volta.<br>
+                <form method="post">
+                    <button type="submit" name="accept_cookie" class="button" value=True> Rifiuta</button>
+                    <button type="submit" name="accept_cookie" class="button" value=False> Accetta</button>
+                </form>
+            </div>
+        {% endif %}
+        <div class="central">
+            <div class="whiteSpace"></div>
+            <div class="content">
+                {% for error in errors %}
+                    <div class="error">{{ error }}</div><br>
+                {% endfor %}
+                {% if session['info'] %}
+                    <form method="post" class="writePopup" style="width:500px;">
+                        Questo sito è pensato per offrire, principalmente a studenti ed eventualmente altri interessati,
+                        informazioni di tipo qualitativo sul modo in cui i docenti svolgono la propria professione tramite
+                        il report di esperienze dirette.<br>
+                        <div class="whiteSpace"></div>
+                        Questo sito è costruito usando:<br>
+                        <div style="flex-direction:row;display:flex;">
+                            <a class="mention" style="background-color:black" href="https://flask.palletsprojects.com/en/2.2.x/" target="_blank">
+                                <img src={{ url_for('element_image', element="flask") }}>
+                                Flask
+                            </a>
+                            <a class="mention" style="background-color:#16A085" href="https://www.mongodb.com/" target="_blank">
+                                <img src={{ url_for('element_image', element="mongodb") }}>
+                                mongoDB
+                            </a>
+                        </div>
+                    </form>
+                {% endif %}
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
